@@ -3,9 +3,13 @@
 Script simulates a simple Firewall and Dos Blocker.
 Project was built on personal Mac machine hence, multiple Mac commands are in the README.
 
-**ToDo:**
+**To Do:**
 
 - build DoS tester / flooder to test if this firewall sim works as intended. [ ]
+
+## Requirements
+
+You'll need to install project requirements. Run: `pip install -r requirements.txt`
 
 ## How to run
 
@@ -14,10 +18,6 @@ Project was built on personal Mac machine hence, multiple Mac commands are in th
 Run: `sudo python3 firewall-simulator.py`
 
 2. **DoS Blocker**
-
-#### Requirements
-
-You'll need to install scapy into the project. Run: `pip install scapy`
 
 #### Check your IP tables for any blocked IP addresses.
 
@@ -48,6 +48,6 @@ anchor "com.apple/*" all
 
 Run: `sudo python3 dos-blocker.py`
 
-### Tech
+## Tech
 
 Python version = 3.14.4
