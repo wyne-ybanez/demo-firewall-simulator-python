@@ -7,8 +7,10 @@ def generate_random_ip():
 def check_firewall_rules(ip_address, firewall_rules):
     """Check if the IP address matches any firewall rule and return the action."""
     for rule_ip, action in firewall_rules.items():
+
         if ip_address == rule_ip:
             return action
+
     return "allow"  # Default action if no rule matches
 
 def main():
@@ -26,9 +28,13 @@ def main():
 
     # Simulate network traffic
     for i in range(12):
+
         ip_address = generate_random_ip()
+
         action = check_firewall_rules(ip_address, firewall_rules)
+
         random_number = random.randint(0, 9999) # service a unique identifier for each request
+
         print(f"{i} - IP: {ip_address}, Action: {action}, Random: {random_number}")
 
 if __name__ == "__main__":
