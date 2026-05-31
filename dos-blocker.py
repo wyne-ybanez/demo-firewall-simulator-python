@@ -32,8 +32,15 @@ def packet_callback(packet):
 
             # If the packet rate exceeds the threshold and the IP is not already blocked, block it using iptables
             if packet_rate > THRESHOLD and ip not in blocked_ips:
+
                 print(f"Blocking IP: {ip}, packet rate: {packet_rate}")
-                os.system(f"iptables -A INPUT -s {ip} -j DROP")
+
+                # LINUX SERVERS
+                # os.system(f"iptables -A INPUT -s {ip} -j DROP")
+
+                # MAC SERVERS
+                os.system(f"echo 'block in from {ip} to any' | pfctl -ef -")
+
                 blocked_ips.add(ip)
 
         packet_count.clear()
@@ -42,11 +49,6 @@ def packet_callback(packet):
 
 
 if __name__ == "__main__":
-    """
-    Used for checking root privileges - will not work without it.
-
-    Initializes start times and packet count.
-    """
 
     if os.geteuid() != 0:
         print("This script requires root privileges.")
@@ -56,7 +58,10 @@ if __name__ == "__main__":
 
     start_time = [time.time()]
 
-    blocked_ips = set() # to keep track of already blocked IPs and avoid redundant blocking, initially an empty object
+    blocked_ips = set() # to keep track of already blocked IPs, initially an empty object
+
+    # MAC SERVERS: Enable pfctl first
+    os.system("pfctl -e 2>/dev/null")
 
     print("Monitoring network traffic...")
 
