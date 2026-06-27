@@ -48,15 +48,16 @@ def get_my_mac_address(interface: str) -> str:
     match = re.search(r"ether ([\w:]+)", output)
     return match.group(1) if match else "n/a"
 
-def get_my_interface_and_ips() -> tuple[str, str] | tuple[None, None]:
+def get_my_interfaces_and_ips() -> list[tuple[str, str]]:
     """
-    Return (interface, ipv4) for the first interface with a routable IPv4 address.
+    Return list of (interface, ipv4) for all interfaces with a routable IPv4 address.
     """
+    interfaces_and_ips = []
     for interface in get_interfaces():
         ipv4 = get_my_ipv4(interface)
         if ipv4 and not ipv4.startswith("127."):
-            return interface, ipv4
-    return None, None
+            interfaces_and_ips.append((interface, ipv4))
+    return interfaces_and_ips
 
 def parse_arp() -> dict[str, dict]:
     """
@@ -102,11 +103,13 @@ def parse_ndp() -> dict[str, list[str]]:
 def main():
     print("\nSCANNING NETWORK...\n")
 
-    interface, my_ipv4 = get_my_interface_and_ips()
-    if not my_ipv4:
+    my_interfaces = get_my_interfaces_and_ips()
+    if not my_interfaces:
         print("Could not determine your IPv4 address. Are you connected?")
         sys.exit(1)
 
+    # Use the first interface and IP (typically the primary one) for scanning
+    interface, my_ipv4 = my_interfaces[0]
     my_mac_addr = get_my_mac_address(interface)
     devices_map = parse_arp()
     mac_to_ipv6 = parse_ndp()
