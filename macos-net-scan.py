@@ -1,5 +1,5 @@
 """
-net-scan.py - Quick network awareness tool
+macos-net-scan.py - Quick network awareness tool
 Shows your IP, interfaces, and who else is on your network.
 macOS-focused (ifconfig / ipconfig / arp).
 """
