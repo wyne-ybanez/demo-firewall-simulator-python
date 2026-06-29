@@ -46,7 +46,7 @@ Both these commands lists your active rules, including any IPs your script block
 
 - check what interface your machine is on and who's on your network: `arp -a`
 
-- I made a MacOS network scanner script, this is a utility script which does all of the above and displays it into the terminal in a visually better way
+- I made a MacOS network scanner script, this is a utility script which does all of the above and displays it into the terminal in a visually better way. Run `sudo python3 macos-net-scan.py`
 
 &nbsp;
 
