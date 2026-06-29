@@ -15,24 +15,18 @@ def packet_callback(packet):
     """
 
     src_ip_address = packet[IP].src
-
     packet_count[src_ip_address] += 1
-
     current_time = time.time()
-
     time_interval = current_time - start_time[0]
 
     if time_interval >= 1:
-
         for ip, count in packet_count.items():
 
             packet_rate = count / time_interval
-
             print(f"IP: {ip}, Packet rate: {packet_rate}")
 
             # If the packet rate exceeds the threshold and the IP is not already blocked, block it using iptables
             if packet_rate > THRESHOLD and ip not in blocked_ips:
-
                 print(f"Blocking IP: {ip}, packet rate: {packet_rate}")
 
                 # LINUX SERVERS
@@ -44,7 +38,6 @@ def packet_callback(packet):
                 blocked_ips.add(ip)
 
         packet_count.clear()
-
         start_time[0] = current_time
 
 
