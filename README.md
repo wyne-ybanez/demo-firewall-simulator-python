@@ -26,7 +26,7 @@ Run: `sudo python3 firewall-simulator.py`
 Run: `sudo python3 dos-blocker.py`
 
 3. **Network Scanner Utility**
-Run: `sudo python3 macos-net-scan.py` - (MacOS devices only)
+Run at root level: `python3 utilities/macos-net-scan.py` - (MacOS devices only)
 
 #### Check your IP tables for any blocked IP addresses.
 
@@ -46,7 +46,7 @@ Both these commands lists your active rules, including any IPs your script block
 
 - check what interface your machine is on and who's on your network: `arp -a`
 
-- I made a MacOS network scanner script, this is a utility script which does all of the above and displays it into the terminal in a visually better way. Run `sudo python3 macos-net-scan.py`
+- I made a network scanner utility script for MacOS devices, which does all of the above and displays it into the terminal in a visually better way. Run at root level: `python3 utilities/macos-net-scan.py`
 
 &nbsp;
 

@@ -13,7 +13,6 @@ def packet_callback(packet):
     """
     Calculates the packet rate for each source IP and blocks IPs that exceed the threshold.
     """
-
     src_ip_address = packet[IP].src
     packet_count[src_ip_address] += 1
     current_time = time.time()
@@ -21,7 +20,6 @@ def packet_callback(packet):
 
     if time_interval >= 1:
         for ip, count in packet_count.items():
-
             packet_rate = count / time_interval
             print(f"IP: {ip}, Packet rate: {packet_rate}")
 
@@ -47,11 +45,10 @@ if __name__ == "__main__":
         print("This script requires root privileges.")
         sys.exit(1)
 
-    packet_count = defaultdict(int) # assigns a default value of 0 for any new IP address encountered
-
+    # Initialize packet count dictionary, start time, and blocked IPs set
+    packet_count = defaultdict(int)
     start_time = [time.time()]
-
-    blocked_ips = set() # to keep track of already blocked IPs, initially an empty object
+    blocked_ips = set()
 
     # MAC SERVERS: Enable pfctl first
     os.system("pfctl -e 2>/dev/null")
