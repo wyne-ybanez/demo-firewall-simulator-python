@@ -10,7 +10,7 @@ macOS-focused (ifconfig / ipconfig / arp).
 
 Usage - at <project_root>/utilities/:
 
-1. python3 macos-net-scan.py
+1. python3 -m utilities.macos_net_scan
 """
 
 

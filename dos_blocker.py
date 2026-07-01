@@ -38,7 +38,6 @@ def load_blocked_ips():
 
             for ip in data:
                 os.system(f"pfctl -qt blocked -T add {ip} 2>/dev/null")
-
             print(f"{YELLOW}STATUS:{RESET} Loaded {len(data)} blocked IP(s) from {BLOCKED_IPS_FILE}")
             return data
     except FileNotFoundError:

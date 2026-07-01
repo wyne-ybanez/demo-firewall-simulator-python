@@ -3,21 +3,27 @@ import sys
 import json
 from theme.theme import *
 
-BLOCKED_IPS_FILE = "../blocked_ips.json"
+BLOCKED_IPS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "blocked_ips.json")
 
 """
 Usage - at <project_root>/utilities/:
 
-1. sudo python3 unblock.py            -> flush all blocked IPs
-2. sudo python3 unblock.py 1.2.3.4    -> unblock a single IP
+1. sudo python3 -m utilities.unblock_ip            -> flush all blocked IPs
+2. sudo python3 -m utilities.unblock_ip 1.2.3.4    -> unblock a single IP
 """
 
 def load_blocked_ips():
     try:
         with open(BLOCKED_IPS_FILE) as f:
             return json.load(f)
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return {}
+
+
+def clear_blocked_ips_in_table(blocked_ips):
+    os.system("pfctl -qt blocked -T flush")
+    blocked_ips.clear()
+    save_blocked_ips(blocked_ips)
 
 
 def save_blocked_ips(blocked_ips):
@@ -37,16 +43,12 @@ if __name__ == "__main__":
         os.system(f"pfctl -qt blocked -T delete {ip}")
         blocked_ips.pop(ip, None)
         save_blocked_ips(blocked_ips)
-        # Terminal messages
         print(f"\n{SEPARATOR}\n")
-        print(f"MESSAGE: Unblocked {ip}")
+        print(f"{GREEN}MESSAGE: Unblocked {ip}{RESET}")
     else:
-        os.system("pfctl -qt blocked -T flush")
-        blocked_ips.clear()
-        save_blocked_ips(blocked_ips)
-        # Terminal messages
+        clear_blocked_ips_in_table(blocked_ips)
         print(f"\n{SEPARATOR}\n")
-        print("MESSAGE: Flushed all blocked IPs")
+        print(f"{GREEN}MESSAGE:{RESET} Flushed all blocked IPs")
 
     print(f"\n{SEPARATOR}\n")
     print("Current table contents:")
