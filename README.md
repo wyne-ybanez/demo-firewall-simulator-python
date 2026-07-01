@@ -30,11 +30,11 @@ Run: `sudo python3 dos_blocker.py`
 1. **Network Scanner (MacOS)**
 Run at root level: `python3 -m utilities.macos_net_scan`
 
-1. **Unblock IPs (MacOs)**
+2. **Unblock IPs (MacOs)**
 - Run at root level: `sudo python3 -m utilities.unblock_ip` - Unblocks all IPs from table
 - Run at root level: `sudo python3 -m utilities.unblock_ip 1.2.3.4` - Unblocks a specific IP from table
 
-1. **Show Blocked IPs Table (MacOS)**
+3. **Show Blocked IPs Table (MacOS)**
 Run at root level: `sudo python3 -m utilities.show_table_blocked_ips` - Displays all blocked IP addresses on your custom table
 
 #### Check your IP tables for any blocked IP addresses.
