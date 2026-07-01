@@ -2,7 +2,7 @@ import os
 import sys
 
 """
-Usage:
+Usage - at <project_root>/utilities/:
 
 1. sudo python3 show-blocked-ips.py   -> show all blocked IPs
 """
@@ -14,3 +14,4 @@ if __name__ == "__main__":
 
     print("\nCurrent table contents:\n")
     os.system("pfctl -qt blocked -T show")
+    print("\n")

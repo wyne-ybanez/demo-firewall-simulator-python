@@ -1,12 +1,12 @@
 import os
 import sys
 import json
+from theme.theme import *
 
 BLOCKED_IPS_FILE = "../blocked_ips.json"
-SEPARATOR = "-" * 50
 
 """
-Usage:
+Usage - at <project_root>/utilities/:
 
 1. sudo python3 unblock.py            -> flush all blocked IPs
 2. sudo python3 unblock.py 1.2.3.4    -> unblock a single IP

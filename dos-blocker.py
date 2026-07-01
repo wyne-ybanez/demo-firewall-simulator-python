@@ -2,12 +2,12 @@ import os
 import sys
 import time
 import json
+from theme.theme import *
 
 from collections import defaultdict # for storing and managing packet counts for each source IP
 from scapy.all import sniff, IP # for packet sniffing and IP address manipulation
 
 
-SEPARATOR = "-" * 50
 THRESHOLD = 40 # Threshold for a sample DoS attack
 ANCHOR_NAME = "dos_blocker"
 BLOCKED_IPS_FILE = "blocked_ips.json"
@@ -22,7 +22,7 @@ def setup_pf():
     """
     os.system("pfctl -e 2>/dev/null")
     os.system(f"echo 'block in from <blocked> to any' | pfctl -a {ANCHOR_NAME} -qf -")
-    print(f"ANCHOR: '{ANCHOR_NAME}' created with table <blocked>\n")
+    print(f"{GREEN}ANCHOR:{RESET} '{ANCHOR_NAME}' created with table <blocked>\n")
 
 
 def load_blocked_ips():
@@ -39,7 +39,7 @@ def load_blocked_ips():
             for ip in data:
                 os.system(f"pfctl -qt blocked -T add {ip} 2>/dev/null")
 
-            print(f"STATUS: Loaded {len(data)} blocked IP(s) from {BLOCKED_IPS_FILE}")
+            print(f"{YELLOW}STATUS:{RESET} Loaded {len(data)} blocked IP(s) from {BLOCKED_IPS_FILE}")
             return data
     except FileNotFoundError:
         return {}
@@ -69,7 +69,7 @@ def packet_callback(packet):
 
             # If the packet rate exceeds the threshold and the IP is not already blocked, block it using iptables
             if packet_rate > THRESHOLD and ip not in blocked_ips:
-                print(f"BLOCK - IP: {ip} , Packet rate: {packet_rate}")
+                print(f"{RED}BLOCK - IP: {ip}, Packet rate: {packet_rate}{RESET}")
 
                 # LINUX SERVERS
                 # os.system(f"iptables -A INPUT -s {ip} -j DROP")
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     start_time = [time.time()]
 
     print(f"\n{SEPARATOR}\n")
-    print(f"THRESHOLD: {THRESHOLD} Packets per second")
+    print(f"{GREEN}THRESHOLD:{RESET} {THRESHOLD} Packets per second")
     print(f"\n{SEPARATOR}\n")
     setup_pf()
     print(f"\n{SEPARATOR}\n")
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     print(f"\n{SEPARATOR}\n")
 
     if blocked_ips:
-        print(f"MESSAGE: Loaded {len(blocked_ips)} already-blocked IP(s) from previous run: \n\n{blocked_ips}")
+        print(f"{CYAN}MESSAGE:{RESET} Loaded {len(blocked_ips)} already-blocked IP(s) from previous run. \n\n{blocked_ips}")
         print(f"\n{SEPARATOR}\n")
 
     print("Monitoring network traffic...\n")

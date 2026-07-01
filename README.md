@@ -28,11 +28,14 @@ Run: `sudo python3 dos-blocker.py`
 ## Utility Scripts
 
 1. **Network Scanner (MacOS)**
-Run at root level: `python3 utilities/macos-net-scan.py` - (MacOS devices only)
+Run at root level: `python3 -m utilities.macos-net-scan` - (MacOS devices only)
 
-2. **Unblock IPs (MacOs)**
-Run at root level: `sudo python3 utilities/unblock-ip.py` - Unblocks all IPs from table (MacOS devices only)
-Run at root level: `sudo python3 utilities/unblock-ip.py 1.2.3.4` - Unblocks a specific IP from table (MacOS devices only)
+1. **Unblock IPs (MacOs)**
+Run at root level: `sudo python3 -m utilities.unblock-ip` - Unblocks all IPs from table (MacOS devices only)
+Run at root level: `sudo python3 -m utilities.unblock-ip 1.2.3.4` - Unblocks a specific IP from table (MacOS devices only)
+
+1. **Show Blocked IPs Table**
+Run at root level: `sudo python3 -m utilities.show-table-blocked-ips` - Unblocks a specific IP from table (MacOS devices only)
 
 #### Check your IP tables for any blocked IP addresses.
 
@@ -54,7 +57,7 @@ Both these commands lists your active rules, including any IPs your script block
 
 - check what interface your machine is on and who's on your network: `arp -a`
 
-- I made a network scanner utility script for MacOS devices, which does all of the above and displays it into the terminal in a visually better way. Run at root level: `python3 utilities/macos-net-scan.py`
+- I made a network scanner utility script for MacOS devices, which does all of the above and displays it into the terminal in a visually better way. Run at root level: `python3 -m utilities.macos-net-scan`
 
 &nbsp;
 

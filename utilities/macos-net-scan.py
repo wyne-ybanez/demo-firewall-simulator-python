@@ -1,21 +1,18 @@
-"""
-macos-net-scan.py - Quick network awareness tool
-Shows your IP, interfaces, and who else is on your network.
-macOS-focused (ifconfig / ipconfig / arp).
-"""
 import subprocess
 import re
 import sys
+from theme.theme import *
 
-# Colours and Font options for terminal output
-GREEN  = "\033[92m"
-YELLOW = "\033[93m"
-CYAN   = "\033[96m"
-RED    = "\033[91m"
-RESET  = "\033[0m"
-BOLD   = "\033[1m"
+"""
+Quick network awareness tool
+Shows your IP, interfaces, and who else is on your network.
+macOS-focused (ifconfig / ipconfig / arp).
 
-SEPARATOR = "-" * 50
+Usage - at <project_root>/utilities/:
+
+1. python3 macos-net-scan.py
+"""
+
 
 def run(cmd: list[str]) -> str:
     """
