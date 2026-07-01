@@ -35,7 +35,7 @@ Run at root level: `python3 -m utilities.macos_net_scan`
 - Run: `sudo python3 -m utilities.unblock_ip 1.2.3.4` - Unblocks a specific IP from table
 
 3. **Show Blocked IPs Table (MacOS)**
-Run: `sudo python3 -m utilities.show_table_blocked_ips` - Displays all blocked IP addresses on your custom table
+- Run: `sudo python3 -m utilities.show_table_blocked_ips` - Displays all blocked IP addresses on your custom table
 
 #### Check your IP tables for any blocked IP addresses.
 
