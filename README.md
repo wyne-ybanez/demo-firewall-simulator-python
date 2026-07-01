@@ -18,21 +18,29 @@ You'll need to install project requirements. Run: `pip install -r requirements.t
 ## How to run
 
 1. **Firewall Simulator Starter**
-
 Run: `sudo python3 firewall-simulator.py`
 
 2. **DoS Blocker**
-
 Run: `sudo python3 dos-blocker.py`
 
-3. **Network Scanner Utility**
+&nbsp;
+
+## Utility Scripts
+
+1. **Network Scanner (MacOS)**
 Run at root level: `python3 utilities/macos-net-scan.py` - (MacOS devices only)
+
+2. **Unblock IPs (MacOs)**
+Run at root level: `sudo python3 utilities/unblock-ip.py` - Unblocks all IPs from table (MacOS devices only)
+Run at root level: `sudo python3 utilities/unblock-ip.py 1.2.3.4` - Unblocks a specific IP from table (MacOS devices only)
 
 #### Check your IP tables for any blocked IP addresses.
 
 - Linux Server - in your terminal run: `sudo iptables -L INPUT -n`
 
-- Mac Server - in your terminal run: `sudo pfctl -sr`
+- Mac Server - in your terminal run:
+    - `sudo pfctl -sr` - show the main ruleset
+    - `sudo pfctl -sA` — lists all anchor names pf currently knows about, useful to confirm `dos_blocker` shows up at all.
 
 Both these commands lists your active rules, including any IPs your script blocked.
 
@@ -52,7 +60,7 @@ Both these commands lists your active rules, including any IPs your script block
 
 #### Caution
 
-For Mac machines you may encounter the response:
+For Mac machines you may encounter the response - this is an expected output and you can just ignore it:
 
 ```
 No ALTQ support in kernel
